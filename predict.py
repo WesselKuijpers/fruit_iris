@@ -9,11 +9,15 @@ import skimage.io as io
 from skimage.transform import resize
 import tensorflow as tf
 
+# TODO: find a good way to resize an image
+# load a model
 model = load_model('110525032019/fruit360_v1.h5py')
+# fetch an image
 img = io.imread('img/rd_1.png', as_gray=False)
-# img = resize(img, (100, 100, 3))
+# prepare the image
 img = img.astype('float32')
 img = img / 255
 img = img.reshape(-1, 100, 100, 3)
+# predict and print
 pred = model.predict_classes(img, verbose=1)
 print(pred)
