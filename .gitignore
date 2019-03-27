@@ -1,4 +1,4 @@
-saved_models/
-processes/
-img/
-data/
+/data
+/img
+/processes
+/saved_models
