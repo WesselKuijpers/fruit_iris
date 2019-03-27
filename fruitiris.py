@@ -8,8 +8,8 @@ from keras.layers.advanced_activations import LeakyReLU
 from keras.models import Sequential
 from keras.preprocessing.image import ImageDataGenerator
 
-# hyperparametrs
-epochs = 20
+# hyperparameters
+epochs = 5
 batch_size = 32
 # dataset directories
 train_data_dir = 'data/dataset/fruits-360/Training'
@@ -49,6 +49,7 @@ model.add(LeakyReLU(alpha=0.1))
 model.add(Dense(11, activation='relu'))
 model.add(Dense(11, activation='softmax'))
 
+# compile the model
 model.compile(
     loss='categorical_crossentropy',
     optimizer='adam',
@@ -111,16 +112,20 @@ finally:
         val_accuracy = hist.history['val_acc']
         loss = hist.history['loss']
         val_loss = hist.history['val_loss']
-        epochs = range(len(accuracy))
-        plt.plot(epochs, accuracy, 'r', label='Training accuracy')
-        plt.plot(epochs, val_accuracy, 'b', label='Validation accuracy')
+        epochs = range(len(accuracy)) + 1
+        plt.plot(epochs, accuracy, 'ro', label='Training accuracy')
+        plt.plot(epochs, val_accuracy, 'bo', label='Validation accuracy')
+        plt.plot(epochs, accuracy, 'r')
+        plt.plot(epochs, val_accuracy, 'b')
 
         plt.title('Training and validation accuracy')
         plt.legend()
 
         plt.figure()
-        plt.plot(epochs, loss, 'r', label='Training loss')
-        plt.plot(epochs, val_loss, 'b', label='Validation loss')
+        plt.plot(epochs, loss, 'ro', label='Training loss')
+        plt.plot(epochs, val_loss, 'bo', label='Validation loss')
+        plt.plot(epochs, loss, 'r')
+        plt.plot(epochs, val_loss, 'b')
         plt.title('Training and validation loss')
         plt.legend()
 
