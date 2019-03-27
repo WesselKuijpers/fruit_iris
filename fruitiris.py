@@ -20,28 +20,28 @@ model = Sequential()
 model.add(Conv2D(128, (3, 3), input_shape=(100, 100, 3)))
 model.add(LeakyReLU(alpha=0.1))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.3))
+model.add(Dropout(0.4))
 
 model.add(Conv2D(128, (3, 3)))
 model.add(LeakyReLU(alpha=0.1))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.3))
+model.add(Dropout(0.4))
 
 model.add(Conv2D(128, (3, 3)))
 model.add(LeakyReLU(alpha=0.1))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.3))
+model.add(Dropout(0.4))
 
 model.add(Conv2D(128, (3, 3)))
 model.add(Dropout(0.1))
 model.add(LeakyReLU(alpha=0.1))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.3))
+model.add(Dropout(0.4))
 
 model.add(Conv2D(128, (3, 3)))
 model.add(LeakyReLU(alpha=0.1))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.3))
+model.add(Dropout(0.4))
 
 model.add(Flatten())
 model.add(Dense(128))
@@ -98,11 +98,13 @@ try:
 
     model.save('saved_models/' + str(int(time.time())) + 'finished.h5py')
 except KeyboardInterrupt:
+    hist = None
     # if the process is interupted by the user save the interupted model
     if model.save('saved_models/' + str(int(time.time())) + 'interupted.h5py'):
         print("interupted model was saved")
     raise
 except:
+    hist = None
     # re-raise the error on any other interuption
     raise
 finally:
@@ -112,7 +114,7 @@ finally:
         val_accuracy = hist.history['val_acc']
         loss = hist.history['loss']
         val_loss = hist.history['val_loss']
-        epochs = range(len(accuracy)) + 1
+        epochs = range(len(accuracy))
         plt.plot(epochs, accuracy, 'ro', label='Training accuracy')
         plt.plot(epochs, val_accuracy, 'bo', label='Validation accuracy')
         plt.plot(epochs, accuracy, 'r')
