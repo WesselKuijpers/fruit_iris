@@ -9,8 +9,8 @@ from keras.models import Sequential
 from keras.preprocessing.image import ImageDataGenerator
 
 # hyperparameters
-epochs = 5
-batch_size = 32
+epochs = 20
+batch_size = 64
 # dataset directories
 train_data_dir = 'data/Fruit/train'
 validation_data_dir = 'data/Fruit/test'
