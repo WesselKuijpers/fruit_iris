@@ -12,8 +12,8 @@ from keras.preprocessing.image import ImageDataGenerator
 epochs = 20
 batch_size = 32
 # dataset directories
-train_data_dir = 'data/dataset/fruits-360/Training'
-validation_data_dir = 'data/dataset/fruits-360/Test'
+train_data_dir = 'data/Fruit/train'
+validation_data_dir = 'data/Fruit/test'
 
 # model
 model = Sequential()
@@ -47,7 +47,7 @@ model.add(Flatten())
 model.add(Dense(128))
 model.add(LeakyReLU(alpha=0.1))
 model.add(Dense(11, activation='relu'))
-model.add(Dense(11, activation='softmax'))
+model.add(Dense(6, activation='softmax'))
 
 model.compile(
     loss='categorical_crossentropy',
