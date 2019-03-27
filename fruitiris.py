@@ -112,24 +112,14 @@ finally:
         loss = hist.history['loss']
         val_loss = hist.history['val_loss']
         epochs = range(len(accuracy))
-
-        z_acc = np.polyfit(epochs, accuracy, 1)
-        p_acc = np.poly1d(z_acc)
-
         plt.plot(epochs, accuracy, 'r', label='Training accuracy')
-        plt.plot(epochs, p_acc(epochs), 'g', label='accuracy trend')
         plt.plot(epochs, val_accuracy, 'b', label='Validation accuracy')
 
         plt.title('Training and validation accuracy')
         plt.legend()
 
         plt.figure()
-
-        z_loss = np.polyfit(epochs, accuracy, 1)
-        p_loss = np.poly1d(z_loss)
-        
         plt.plot(epochs, loss, 'r', label='Training loss')
-        plt.plot(epochs, p_loss(epochs), 'g', label='loss trend')
         plt.plot(epochs, val_loss, 'b', label='Validation loss')
         plt.title('Training and validation loss')
         plt.legend()

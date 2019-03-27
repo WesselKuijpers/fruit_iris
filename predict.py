@@ -11,9 +11,9 @@ import tensorflow as tf
 
 # TODO: find a good way to resize an image
 # load a model
-model = load_model('110525032019/fruit360_v1.h5py')
+model = load_model('processes/134326032019/fruit360.h5py')
 # fetch an image
-img = io.imread('img/rd_1.png', as_gray=False)
+img = io.imread('img/braeburn2.png', as_gray=False)
 # prepare the image
 img = img.astype('float32')
 img = img / 255
