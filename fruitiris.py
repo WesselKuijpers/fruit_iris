@@ -10,7 +10,7 @@ from keras.preprocessing.image import ImageDataGenerator
 
 # hyperparameters
 epochs = 20
-batch_size = 64
+batch_size = 32
 # dataset directories
 train_data_dir = 'data/Fruit/train'
 validation_data_dir = 'data/Fruit/test'
@@ -34,11 +34,6 @@ model.add(Dropout(0.4))
 
 model.add(Conv2D(128, (3, 3)))
 model.add(Dropout(0.1))
-model.add(LeakyReLU(alpha=0.1))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.4))
-
-model.add(Conv2D(128, (3, 3)))
 model.add(LeakyReLU(alpha=0.1))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.4))
@@ -100,9 +95,8 @@ try:
 except KeyboardInterrupt:
     hist = None
     # if the process is interupted by the user save the interupted model
-    if model.save('saved_models/' + str(int(time.time())) + 'interupted.h5py'):
-        print("interupted model was saved")
-    raise
+    model.save('saved_models/' + str(int(time.time())) + 'interupted.h5py')
+    print("\ninterupted model was saved")
 except:
     hist = None
     # re-raise the error on any other interuption
