@@ -147,4 +147,3 @@ finally:
         plt.show()
     else:
         print("No graph could be generated: DATA INCOMPLETE")
-
