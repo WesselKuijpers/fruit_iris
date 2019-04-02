@@ -66,13 +66,11 @@ class Network:
                 validation_data=validation_generator,
                 validation_steps=1883 // self.batch_size)
 
-            model.save('saved_models/' +
-                       str(int(time.time())) + 'finished.h5py')
+            model.save('saved_models/' + str(int(time.time())) + 'finished.h5py')
         except KeyboardInterrupt:
             hist = None
             # if the process is interupted by the user save the interupted model
-            model.save('saved_models/' +
-                       str(int(time.time())) + 'interupted.h5py')
+            model.save('saved_models/' + str(int(time.time())) + 'interupted.h5py')
             print("\ninterupted model was saved")
         except:
             hist = None

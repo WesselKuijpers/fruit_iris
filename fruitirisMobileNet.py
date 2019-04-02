@@ -12,14 +12,14 @@ from keras.applications.mobilenet_v2 import MobileNetV2
 
 # hyperparameters
 epochs = 5
-batch_size = 32
+batch_size = 1
 # dataset directories
 train_data_dir = 'data/Fruit/train'
 validation_data_dir = 'data/Fruit/test'
 
 # model
 model = Sequential()
-mn = MobileNetV2(pooling='max')
+mn = MobileNetV2(pooling='max', include_top=False)
 mn.layers.pop()
 model.add(mn)
 model.add(Dense(6, activation='softmax'))
@@ -62,10 +62,10 @@ validation_generator = test_datagen.flow_from_directory(
 try:
     hist = model.fit_generator(
         generator=train_generator,
-        steps_per_epoch=5516 // batch_size,
+        steps_per_epoch=10 // batch_size,
         epochs=epochs,
         validation_data=validation_generator,
-        validation_steps=1883 // batch_size)
+        validation_steps=1 // batch_size)
 
     model.save('saved_models/' + str(int(time.time())) + 'finished.h5py')
 except KeyboardInterrupt:
