@@ -9,6 +9,7 @@ from keras.layers.advanced_activations import LeakyReLU
 from keras.models import Sequential
 from keras.optimizers import SGD
 from keras.applications.vgg19 import VGG19
+from keras.preprocessing.image import ImageDataGenerator
 
 # hyperparameters
 epochs = 5
@@ -20,7 +21,6 @@ validation_data_dir = 'data/Fruit/test'
 # model
 model = VGG19(include_top=True, weights=None, classes=6)
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
 # train datagenerator
