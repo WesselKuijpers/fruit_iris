@@ -18,11 +18,7 @@ train_data_dir = 'data/Fruit/train'
 validation_data_dir = 'data/Fruit/test'
 
 # model
-model = Sequential()
-mn = MobileNetV2(pooling='max', include_top=False)
-mn.layers.pop()
-model.add(mn)
-model.add(Dense(6, activation='softmax'))
+model = MobileNetV2(pooling='max', weights=None, classes=6)
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
