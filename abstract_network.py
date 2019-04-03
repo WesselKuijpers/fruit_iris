@@ -11,11 +11,13 @@ from keras.preprocessing.image import ImageDataGenerator
 
 
 class Network:
-    def __init__(self, epochs, batch_size, train_dir, val_dir):
+    def __init__(self, epochs, batch_size, train_dir, val_dir, width, height):
         self.epochs = epochs
         self.batch_size = batch_size
         self.train_dir = train_dir
         self.val_dir = val_dir
+        self.width = width
+        self.height = height
         self.model = None
 
     def set_model(self, model):
@@ -45,14 +47,14 @@ class Network:
     def train_directory_flow(self, train_generator):
         return train_generator.flow_from_directory(
             self.train_dir,
-            target_size=(100, 100),
+            target_size=(self.width, self.height),
             batch_size=self.batch_size,
             class_mode='categorical')
 
     def validation_directory_flow(self, val_generator):
         return val_generator.flow_from_directory(
             self.val_dir,
-            target_size=(100, 100),
+            target_size=(self.width, self.height),
             batch_size=self.batch_size,
             class_mode='categorical')
 

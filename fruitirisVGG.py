@@ -9,6 +9,7 @@ from keras.layers.advanced_activations import LeakyReLU
 from keras.models import Sequential
 from keras.optimizers import SGD
 from keras.applications.vgg19 import VGG19
+from keras.preprocessing.image import ImageDataGenerator
 
 # hyperparameters
 epochs = 5
