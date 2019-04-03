@@ -89,8 +89,7 @@ class Network:
             val_loss = hist.history['val_loss']
             epochs = range(len(accuracy))
             plt.plot(epochs, accuracy, 'ro', label='Training accuracy')
-            plt.plot(epochs, val_accuracy, 'bo',
-                     label='Validation accuracy')
+            plt.plot(epochs, val_accuracy, 'bo', label='Validation accuracy')
             plt.plot(epochs, accuracy, 'r')
             plt.plot(epochs, val_accuracy, 'b')
 
