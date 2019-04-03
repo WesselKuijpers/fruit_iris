@@ -3,23 +3,24 @@ import time
 import matplotlib.pyplot as plt
 import numpy as np
 from keras import backend as K
+from keras.applications.vgg19 import VGG19
 from keras.layers import Conv2D, Dense, Dropout, Flatten, MaxPooling2D
 from keras.layers.advanced_activations import LeakyReLU
 from keras.models import Sequential
-from keras.preprocessing.image import ImageDataGenerator
 from keras.optimizers import SGD
-from keras.applications.mobilenet_v2 import MobileNetV2
+from keras.applications.vgg19 import VGG19
 
 # hyperparameters
 epochs = 5
-batch_size = 1
+batch_size = 2
 # dataset directories
 train_data_dir = 'data/Fruit/train'
 validation_data_dir = 'data/Fruit/test'
 
 # model
-model = MobileNetV2(pooling='max', weights=None, classes=6)
+model = VGG19(include_top=True, weights=None, classes=6)
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
 # train datagenerator
@@ -58,10 +59,10 @@ validation_generator = test_datagen.flow_from_directory(
 try:
     hist = model.fit_generator(
         generator=train_generator,
-        steps_per_epoch=10 // batch_size,
+        steps_per_epoch=441 // batch_size,
         epochs=epochs,
         validation_data=validation_generator,
-        validation_steps=1 // batch_size)
+        validation_steps=96 // batch_size)
 
     model.save('saved_models/' + str(int(time.time())) + 'finished.h5py')
 except KeyboardInterrupt:
