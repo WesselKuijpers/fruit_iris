@@ -2,7 +2,6 @@ from keras.models import load_model
 import matplotlib.pyplot as plt
 from keras.preprocessing import image
 import random
-import cv2
 import numpy as np
 import tensorflow
 import skimage.io as io

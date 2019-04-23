@@ -6,11 +6,12 @@ from keras.optimizers import SGD
 from keras.preprocessing.image import ImageDataGenerator
 from abstract_network import Network
 from keras.applications.densenet import DenseNet121
+import tensorflow as tf
 
-network = Network(epochs=5, batch_size=32, train_dir='data/Fruit/train', val_dir='data/Fruit/test', width=224, height=224)
+network = Network(epochs=20, batch_size=16, train_dir='data/plant_disease/train', val_dir='data/plant_disease/test', width=224, height=224)
 
 # model
-model = DenseNet121(pooling='max', weights=None, classes=6)
+model = DenseNet121(pooling='max', weights=None, classes=38)       
 
 model = network.set_model(model)
 train_datagen = network.train_data_generator()

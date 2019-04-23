@@ -7,10 +7,11 @@ from keras.optimizers import SGD
 from keras.preprocessing.image import ImageDataGenerator
 from keras.applications.inception_resnet_v2 import InceptionResNetV2
 
-network = Network(epochs=5, batch_size=32, train_dir='data/Fruit/train', val_dir='data/Fruit/test', width=299, height=299)
+network = Network(epochs=40, batch_size=16, train_dir='data/plant_disease/train',
+                  val_dir='data/plant_disease/test', width=299, height=299)
 
 # model
-model = InceptionResNetV2(include_top=True, weights=None, classes=6)
+model = InceptionResNetV2(include_top=True, weights=None, classes=38)
 
 model = network.set_model(model)
 train_datagen = network.train_data_generator()

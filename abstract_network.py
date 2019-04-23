@@ -8,10 +8,16 @@ from keras.layers.advanced_activations import LeakyReLU
 from keras.models import Sequential
 from keras.optimizers import SGD
 from keras.preprocessing.image import ImageDataGenerator
+import tensorflow as tf
 
 
 class Network:
     def __init__(self, epochs, batch_size, train_dir, val_dir, width, height):
+        gpu_options = tf.GPUOptions(
+            per_process_gpu_memory_fraction=0.8, allow_growth=True)
+        sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
+        K.set_session(sess)
+
         self.epochs = epochs
         self.batch_size = batch_size
         self.train_dir = train_dir
@@ -23,7 +29,8 @@ class Network:
     def set_model(self, model):
         self.model = model
         sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-        self.model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
+        self.model.compile(loss='categorical_crossentropy',
+                           optimizer=sgd, metrics=['accuracy'])
         return self.model
 
     def train_data_generator(self):
@@ -68,11 +75,13 @@ class Network:
                 validation_data=validation_generator,
                 validation_steps=1883 // self.batch_size)
 
-            model.save('saved_models/' + str(int(time.time())) + 'finished.h5py')
+            model.save('saved_models/' +
+                       str(int(time.time())) + 'finished.h5py')
         except KeyboardInterrupt:
             hist = None
             # if the process is interupted by the user save the interupted model
-            model.save('saved_models/' + str(int(time.time())) + 'interupted.h5py')
+            model.save('saved_models/' +
+                       str(int(time.time())) + 'interupted.h5py')
             print("\ninterupted model was saved")
         except:
             hist = None
